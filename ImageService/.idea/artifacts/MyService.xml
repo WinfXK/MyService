@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MyService">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="MyService.jar">
+      <element id="module-output" name="ImageService" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="directory" name="MyService">
+        <element id="dir-copy" path="$PROJECT_DIR$/MyService" />
+      </element>
+    </root>
+  </artifact>
+</component>
