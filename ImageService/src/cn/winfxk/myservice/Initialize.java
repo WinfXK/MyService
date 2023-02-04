@@ -26,7 +26,7 @@ public class Initialize {
         String path = Initialize.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         path = java.net.URLDecoder.decode(path, "utf-8");
         Initialize.JarFile = new File(path);
-        Initialize.WorkingPath = JarFile.getParentFile();
+        Initialize.WorkingPath = new File(JarFile.getParentFile(), "MyService");
         Initialize.FilePath = new File(Initialize.WorkingPath, "System/File");
         Initialize.ImageFile = new File(Initialize.WorkingPath, "System/Image");
         Initialize.errorFile = new File(Initialize.WorkingPath, "System/error");
@@ -40,7 +40,7 @@ public class Initialize {
             jarEntry = jarEntrys.nextElement();
             JarEntryName = jarEntry.getName();
             if (!isNeed(JarEntryName)) continue;
-            file = new File(WorkingPath, JarEntryName);
+            file = new File(WorkingPath.getParent(), JarEntryName);
             if (jarEntry.isDirectory()) {
                 if (!file.exists()) file.mkdirs();
                 continue;
@@ -100,9 +100,8 @@ public class Initialize {
     private static void write(String JarFile, File file) throws Exception {
         FileOutputStream stream = new FileOutputStream(file);
         InputStream inputStream = Initialize.class.getResourceAsStream("/" + JarFile);
-        byte[] b = new byte[1024];
-        while (inputStream.read(b) != -1)
-            stream.write(b);
+        for (long i = 0; i < inputStream.available(); i++)
+            stream.write(inputStream.read());
         stream.close();
         inputStream.close();
     }

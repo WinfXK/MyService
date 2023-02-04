@@ -752,6 +752,7 @@ public class Tool implements X509TrustManager, HostnameVerifier {
             os.write(param.getBytes());
             os.close();
         }
+        System.out.println(connection. getHeaderFields());
         if (connection.getResponseCode() == 200) {
             is = connection.getInputStream();
             br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
